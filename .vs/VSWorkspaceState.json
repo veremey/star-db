@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\public",
+    "\\public\\css",
+    "\\src",
+    "\\src\\components",
+    "\\src\\components\\app",
+    "\\src\\components\\header",
+    "\\src\\components\\random-planet"
+  ],
+  "SelectedNode": "\\src\\components\\random-planet\\random-planet.js",
+  "PreviewInSolutionExplorer": false
+}
