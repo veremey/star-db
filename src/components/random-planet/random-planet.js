@@ -18,11 +18,11 @@ export default class RandomPlanet extends Component {
   componentDidMount() {
     this.updatePlanet();
     this.interval = setInterval(this.updatePlanet, 10000);
-  };
+  }
 
   componentWillUnmount() {
     clearInterval(this.interval);
-  };
+  }
 
   onPlanetLoaded = (planet) => {
     this.setState({
@@ -37,11 +37,10 @@ export default class RandomPlanet extends Component {
       error: true,
       loading: false
     });
-};
+  };
 
   updatePlanet = () => {
-    const id = Math.floor(Math.random() * 17 + 2);
-
+    const id = Math.floor(Math.random()*17) + 2;
     this.swapiService
       .getPlanet(id)
       .then(this.onPlanetLoaded)
@@ -53,7 +52,7 @@ export default class RandomPlanet extends Component {
 
     const hasData = !(loading || error);
 
-    const errorMessage = error ? <ErrorIndicator /> : null;
+    const errorMessage = error ? <ErrorIndicator/> : null;
     const spinner = loading ? <Spinner /> : null;
     const content = hasData ? <PlanetView planet={planet}/> : null;
 
@@ -67,16 +66,17 @@ export default class RandomPlanet extends Component {
   }
 }
 
-
 const PlanetView = ({ planet }) => {
+
   const { id, name, population,
-    rotationPeriod, diamenter } = planet;
+    rotationPeriod, diameter } = planet;
 
   return (
     <React.Fragment>
       <img className="planet-image"
-        src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} />
-      <div className="planet-content">
+           src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+           alt="planet" />
+      <div>
         <h4>{name}</h4>
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
@@ -89,10 +89,13 @@ const PlanetView = ({ planet }) => {
           </li>
           <li className="list-group-item">
             <span className="term">Diameter</span>
-            <span>{diamenter}</span>
+            <span>{diameter}</span>
           </li>
         </ul>
       </div>
     </React.Fragment>
-    );
-}; 
+  );
+};
+
+
+
