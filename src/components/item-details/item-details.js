@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 
 import ErrorButton from '../error-button/error-button';
-import SwapiService from '../../services/swapi-service';
 
 import './item-details.css';
 
 const Record = ({ item, field, label }) => {
-  console.log(item);
   return (
     <li className="list-group-item">
-      <span className="term">{ label }</span>
+      <span className="term">{label}</span>
       <span>{ item[field] }</span>
     </li>
   );
@@ -19,10 +17,7 @@ export {
   Record
 };
 
-
 export default class ItemDetails extends Component {
-
-  swapiService = new SwapiService();
 
   state = {
     item: null,
