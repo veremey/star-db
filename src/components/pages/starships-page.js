@@ -5,7 +5,7 @@ import Row from '../row';
 export default
   class StarshipPage extends Component {
   state = {
-    selectedItem: null
+    selectedItem: 11 // default val is null but will show empty box
   };
 
   onItemSelected = (selectedItem) => {
