@@ -13,15 +13,12 @@ import SwapiService from "../../services/swapi-service";
 
 import './app.css';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { StarshipDetails } from "../sw-components";
 
 export default class App extends Component {
 
   swapiService = new SwapiService();
-
-  state = {
-    showRandomPlanet: true
-  };
 
   toggleRandomPlanet = () => {
     this.setState((state) => {
@@ -32,27 +29,34 @@ export default class App extends Component {
   };
 
   render() {
-    const planet = this.state.showRandomPlanet ?
-      <RandomPlanet /> :
-      null;
-
     return (
       <ErrorBoundry>
         <Router>
           <div className="stardb-app">
             <Header />
+            <RandomPlanet/>
+            <Switch>
 
-            {planet}
-
-            <Route path="/"
-              exact
-              render={() => {
-                return <h2>Welcome to StarDB</h2>
-              }} />
-            <Route path="/people" component={PeoplePage}/>
-            <Route path="/planets" component={ PlanetPage }/>
-            <Route path="/starships" component={ StarshipPage }/>
-
+              <Route path="/"
+                exact
+                render={() => {
+                  return <h2 className="text-center">Welcome to StarDB</h2>
+                }} />
+              <Route path="/:*?"
+                component={RandomPlanet}
+              />
+              <Route path="/people" component={PeoplePage}/>
+              <Route path="/planets" component={ PlanetPage }/>
+              <Route path="/starships" exact component={ StarshipPage }/>
+              <Route path="/starships/:id"
+                    render={ ({ match }) => {
+                    const { id } = match.params;
+                    return <StarshipDetails itemId={id}/>
+                }}
+              />
+              <Route render={() => <div className="text-center" ><h3>Page not found</h3><h2> 404  </h2></div>}
+               />
+            </Switch>
           </div>
         </Router>
       </ErrorBoundry>
